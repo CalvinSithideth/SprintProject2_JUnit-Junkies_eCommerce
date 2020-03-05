@@ -21,7 +21,7 @@ class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
 			boolean isSelected, // is the cell selected
 			boolean cellHasFocus) // does the cell have focus
 	{
-		String s = value.toString();ss
+		String s = value.toString();
 		setText(s);
 		setIcon((s.length() > 10) ? longIcon : shortIcon);
 		if (isSelected) {
