@@ -2,6 +2,8 @@ DROP SCHEMA IF EXISTS eCommerce_JUnitJunkies;
 CREATE SCHEMA eCommerce_JUnitJunkies;
 
 USE eCommerce_JUnitJunkies;
+CREATE USER IF NOT EXISTS 'default'@'localhost' IDENTIFIED BY 'COVA';
+GRANT ALL PRIVILEGES ON * . * TO 'default'@'localhost';
 
 DROP TABLE IF EXISTS Customers;
 CREATE TABLE Customers
@@ -46,18 +48,6 @@ CREATE TABLE Shippers
         ,	Phone			VARCHAR(15)		NOT NULL
         ,	Email			VARCHAR(320)	NOT NULL -- Standard length for emails in DBs
 	);
-
-DROP TABLE IF EXISTS OrderDetails;
-CREATE TABLE OrderDetails
-	(
-			OrderNumber		INTEGER			NOT NULL		-- FOREIGN KEY
-        ,	SKU				INTEGER			NOT NULL		-- FOREIGN KEY
-        ,	Quantity		INTEGER			NOT NULL
-        ,	SalePrice		DECIMAL			NOT NULL
-        ,	Discount		DECIMAL			NOT NULL
-        ,	FOREIGN KEY 		(OrderNumber)	REFERENCES 	Orders(OrderNumber)
-        ,	FOREIGN KEY 		(SKU)	REFERENCES	Products(SKU)
-	);
     
 DROP TABLE IF EXISTS Categories;
 CREATE TABLE Categories
@@ -100,6 +90,18 @@ CREATE TABLE Orders
         ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
     );
     
+DROP TABLE IF EXISTS OrderDetails;
+CREATE TABLE OrderDetails
+	(
+			OrderNumber		INTEGER			NOT NULL		-- FOREIGN KEY
+        ,	SKU				INTEGER			NOT NULL		-- FOREIGN KEY
+        ,	Quantity		INTEGER			NOT NULL
+        ,	SalePrice		DECIMAL			NOT NULL
+        ,	Discount		DECIMAL			NOT NULL
+        ,	FOREIGN KEY 		(OrderNumber)	REFERENCES 	Orders(OrderNumber)
+        ,	FOREIGN KEY 		(SKU)	REFERENCES	Products(SKU)
+        ,	PRIMARY KEY (OrderNumber, SKU)
+	);
 
 INSERT INTO Customers
 		(Name, AddressLine1, AddressLine2, City, State, ZipCode, Email, Phone, BillingInfo)
