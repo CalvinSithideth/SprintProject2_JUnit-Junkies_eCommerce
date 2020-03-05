@@ -17,3 +17,51 @@ CREATE TABLE Customers
         ,	Phone			VARCHAR(15)		NOT NULL
         ,	BillingInfo		VARCHAR(20)		NOT NULL -- Credit card number
     );
+
+DROP TABLE IF EXISTS Suppliers;
+CREATE TABLE Suppliers
+	(
+			SupplierID		INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
+		,	SupplierName	VARCHAR(30)		NOT NULL	
+		,	ContactFName	VARCHAR(25)		NOT NULL	
+        ,	ContactLName	VARCHAR(25)		NOT NULL
+        ,	ContactTitle	VARCHAR(25)		NOT NULL
+        ,	AddressLine1	VARCHAR(30)		NOT NULL
+        ,	AddressLine2	VARCHAR(30)		NULL
+        ,	City			VARCHAR(30)		NOT NULL
+        ,	State			VARCHAR(30)		NOT NULL
+        ,	ZipCode			VARCHAR(10)		NOT NULL
+        ,	Phone			VARCHAR(15)		NOT NULL
+        ,	Email			VARCHAR(320)	NOT NULL -- Standard length for emails in DBs
+	);
+    
+DROP TABLE IF EXISTS Shippers;
+CREATE TABLE Shippers
+	(
+			ShipperID		INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
+ 		,	ShipperName 	VARCHAR(30)		NOT NULL
+		,	ContactFName	VARCHAR(25)		NOT NULL	
+        ,	ContactLName	VARCHAR(25)		NOT NULL
+        ,	ContactTitle	VARCHAR(25)		NOT NULL
+        ,	Phone			VARCHAR(15)		NOT NULL
+        ,	Email			VARCHAR(320)	NOT NULL -- Standard length for emails in DBs
+	);
+
+DROP TABLE IF EXISTS OrderDetails;
+CREATE TABLE OrderDetails
+	(
+			OrderNumber		INTEGER			NOT NULL		-- FOREIGN KEY
+        ,	SKU				INTEGER			NOT NULL		-- FOREIGN KEY
+        ,	Quantity		INTEGER			NOT NULL
+        ,	SalePrice		DECIMAL			NOT NULL
+        ,	Discount		DECIMAL			NOT NULL
+	);
+    
+DROP TABLE IF EXISTS Categories;
+CREATE TABLE Categories
+	(
+			CategoryID		INTEGER			NOT NULL	PRIMARY KEY
+		,	CategoryName	VARCHAR(35)		NOT NULL
+        ,	CatDescription	VARCHAR(300)	NOT NULL
+        ,	ParentID		VARCHAR(300)	NOT NULL
+	);
