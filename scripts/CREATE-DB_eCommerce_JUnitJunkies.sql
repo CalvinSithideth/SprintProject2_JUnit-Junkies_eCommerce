@@ -55,6 +55,8 @@ CREATE TABLE OrderDetails
         ,	Quantity		INTEGER			NOT NULL
         ,	SalePrice		DECIMAL			NOT NULL
         ,	Discount		DECIMAL			NOT NULL
+        ,	FOREIGN KEY 		(OrderNumber)	REFERENCES 	Orders(OrderNumber)
+        ,	FOREIGN KEY 		(SKU)	REFERENCES	Products(SKU)
 	);
     
 DROP TABLE IF EXISTS Categories;
@@ -65,3 +67,36 @@ CREATE TABLE Categories
         ,	CatDescription	VARCHAR(300)	NOT NULL
         ,	ParentID		VARCHAR(300)	NOT NULL
 	);
+
+    
+DROP TABLE IF EXISTS Products;
+CREATE TABLE Products
+	(
+			SKU					INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
+        ,	CategoryID			INTEGER			NOT NULL	-- foreign key
+        ,	SupplierID			INTEGER			NOT NULL	-- foreign key
+        ,	ProdName			VARCHAR(30)		NOT NULL
+        ,	ProdDescription		VARCHAR(30)		NOT NULL
+        ,	UnitWeight			INTEGER			NOT NULL
+        ,	UnitsInStock		INTEGER			NOT NULL  
+        ,	UnitsOnOrder		INTEGER			NOT NULL
+        ,	ReOrderLevel		INTEGER			NOT NULL  
+        ,	FOREIGN KEY 		(CategoryID)	REFERENCES 	Categories(CategoryID)
+        ,	FOREIGN KEY 		(SupplierID)	REFERENCES	Suppliers(SupplierID)
+    );
+    
+DROP TABLE IF EXISTS Orders;
+CREATE TABLE Orders
+	(
+			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
+        ,	CustomerID			INTEGER			NOT NULL	-- foreign key
+        ,	ShipperID			INTEGER			NOT NULL	-- foreign key
+        ,	OrderDate			VARCHAR(30)		NOT NULL
+        ,	PaymentInfo			VARCHAR(30)		NOT NULL
+        ,	ShipDate			VARCHAR(30)		NOT NULL
+        ,	Shipper				VARCHAR(30)		NOT NULL 
+        ,	OrderStatus			VARCHAR(30)		NOT NULL
+		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
+        ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
+    );
+    
