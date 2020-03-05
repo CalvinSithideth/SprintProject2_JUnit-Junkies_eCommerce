@@ -1,6 +1,7 @@
 DROP SCHEMA IF EXISTS eCommerce_JUnitJunkies;
 CREATE SCHEMA eCommerce_JUnitJunkies;
 
+
 USE eCommerce_JUnitJunkies;
 CREATE USER IF NOT EXISTS 'default'@'localhost' IDENTIFIED BY 'COVA';
 GRANT ALL PRIVILEGES ON * . * TO 'default'@'localhost';
@@ -19,7 +20,7 @@ CREATE TABLE Customers
         ,	Phone			VARCHAR(15)		NOT NULL
         ,	BillingInfo		VARCHAR(20)		NOT NULL -- Credit card number
     );
-
+    
 DROP TABLE IF EXISTS Suppliers;
 CREATE TABLE Suppliers
 	(
@@ -49,6 +50,21 @@ CREATE TABLE Shippers
         ,	Email			VARCHAR(320)	NOT NULL -- Standard length for emails in DBs
 	);
     
+        DROP TABLE IF EXISTS Orders;
+CREATE TABLE Orders
+	(
+			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
+        ,	CustomerID			INTEGER			NOT NULL	-- foreign key
+        ,	ShipperID			INTEGER			NOT NULL	-- foreign key
+        ,	OrderDate			VARCHAR(30)		NOT NULL
+        ,	PaymentInfo			VARCHAR(30)		NOT NULL
+        ,	ShipDate			VARCHAR(30)		NOT NULL
+        ,	Shipper				VARCHAR(30)		NOT NULL 
+        ,	OrderStatus			VARCHAR(30)		NOT NULL
+		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
+        ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
+    );
+
 DROP TABLE IF EXISTS Categories;
 CREATE TABLE Categories
 	(
@@ -57,7 +73,6 @@ CREATE TABLE Categories
         ,	CatDescription	VARCHAR(300)	NOT NULL
         ,	ParentID		VARCHAR(300)	NOT NULL
 	);
-
     
 DROP TABLE IF EXISTS Products;
 CREATE TABLE Products
@@ -75,8 +90,8 @@ CREATE TABLE Products
         ,	FOREIGN KEY 		(SupplierID)	REFERENCES	Suppliers(SupplierID)
     );
     
-DROP TABLE IF EXISTS Orders;
-CREATE TABLE Orders
+DROP TABLE IF EXISTS OrderDetails;
+CREATE TABLE OrderDetails
 	(
 			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
         ,	CustomerID			INTEGER			NOT NULL	-- foreign key
@@ -102,9 +117,3 @@ CREATE TABLE OrderDetails
         ,	FOREIGN KEY 		(SKU)	REFERENCES	Products(SKU)
         ,	PRIMARY KEY (OrderNumber, SKU)
 	);
-
-INSERT INTO Customers
-		(Name, AddressLine1, AddressLine2, City, State, ZipCode, Email, Phone, BillingInfo)
-VALUES	("Chad Smith", "1123 Wilson Way", "APT 2", "Bompton", "Balifornia", 12345, "Chad@TravelWithChad.com", "555-1234", "123456789")
-	,	("Brad Smith", "1234 Chaddie Dr", NULL, "Bacoma", "Bashington", 54321, "Brad@JourneyWithBrad.com", "555-4321", "987654321")
-;
