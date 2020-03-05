@@ -32,7 +32,7 @@ public class ConsoleApp_eCommerce {
 			int columns = rsmd.getColumnCount();
 
 			// iterate over resultset
-			for (int i = 0; i < columns; i++) {
+			for (int i = 1; i <= columns; i++) {
 				String name = rsmd.getColumnName(i);
 				String value = rs.getString(i);
 				System.out.println(name + ": " + value);
