@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class SelectStatements {
-	static PreparedStatement s;
+	static PreparedStatement s;s
 
 	static PreparedStatement getStatement(Connection con) throws SQLException {
 		String[] tables = { "Customers", "Products", "Categories", "Orders", "OrderDetails", "Suppliers", "Shippers" };

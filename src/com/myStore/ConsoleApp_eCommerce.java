@@ -6,7 +6,7 @@ public class ConsoleApp_eCommerce {
 
 	public static void main(String[] args) {
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.getViewport().setView(myList);
+		scrollPane.getViewport().setView(myList);a
 		myList.setCellRenderer(new MyCellRenderer());
 	}
 
