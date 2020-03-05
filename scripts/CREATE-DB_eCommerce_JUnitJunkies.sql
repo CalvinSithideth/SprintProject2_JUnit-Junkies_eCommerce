@@ -100,3 +100,9 @@ CREATE TABLE Orders
         ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
     );
     
+
+INSERT INTO Customers
+		(Name, AddressLine1, AddressLine2, City, State, ZipCode, Email, Phone, BillingInfo)
+VALUES	("Chad Smith", "1123 Wilson Way", "APT 2", "Bompton", "Balifornia", 12345, "Chad@TravelWithChad.com", "555-1234", "123456789")
+	,	("Brad Smith", "1234 Chaddie Dr", NULL, "Bacoma", "Bashington", 54321, "Brad@JourneyWithBrad.com", "555-4321", "987654321")
+;
