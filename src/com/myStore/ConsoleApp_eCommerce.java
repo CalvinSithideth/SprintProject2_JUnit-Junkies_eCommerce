@@ -32,6 +32,7 @@ public class ConsoleApp_eCommerce {
 			int columns = rsmd.getColumnCount();
 
 			// iterate over resultset
+			// Need to update to fit sql column standards
 			for (int i = 1; i <= columns; i++) {
 				String name = rsmd.getColumnName(i);
 				String value = rs.getString(i);
