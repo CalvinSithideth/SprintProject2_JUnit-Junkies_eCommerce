@@ -1,7 +1,7 @@
 package com.myStore;
 
-public class ConsoleApp_eCommerce
-{
+
+public class ConsoleApp_eCommerce {
 
 	public static void main(String[] args)
 	{
