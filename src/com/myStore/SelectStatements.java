@@ -23,7 +23,7 @@ public class SelectStatements {
 	
 	
 	static String[] getCol(String table) {
-		//how to get 
+		//how to get the list?
 		return null;
 		
 	}
