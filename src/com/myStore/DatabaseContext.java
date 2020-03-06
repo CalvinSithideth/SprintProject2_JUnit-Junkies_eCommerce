@@ -141,9 +141,24 @@ public class DatabaseContext
 		
 	}
 	
-	public List<Customer> getAllCustomers()
+	public List<Customer> getAllCustomers() throws SQLException
 	{
-		
+		{
+	        String sql = "SELECT * FROM Customers";
+	        Statement stmt = con.createStatement();
+	        ResultSet rs = stmt.executeQuery(sql);
+	        stmt.close();
+	        
+	        List<Customer> customers = new ArrayList<Customer>();       
+	        while (rs.next())
+	        {
+	            Customer currCust = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
+	                    , rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+	            customers.add(currCust);
+	        } 
+	        
+	        return customers;
+	    }
 	}
 
 }
