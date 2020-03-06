@@ -66,15 +66,24 @@ public class DatabaseContext
 		
 	}
 	
-	public List<Product> getAllProducts()
+	public List<Product> getAllProducts() throws SQLException
 	{
 		String sql = "SELECT * FROM CoughDrops";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		stmt.close();
 		
+		List<Product> products = new ArrayList<Product>();
 		
+		while (rs.next())
+		{
+			Product currProd = new Product(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+										rs.getString(4), rs.getString(5), rs.getDouble(6),
+										rs.getDouble(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+			products.add(currProd);
+		}
 		
+		return products;
 	}
 	
 	public Order getOrderFromID()

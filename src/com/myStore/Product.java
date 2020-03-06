@@ -12,9 +12,9 @@ public class Product {
 	private int UnitsOnOrder;
 	private int ReOrderLevel;
 
-	public Product(int sKU, int categoryID, int supplierID, String productName, String productDescription,
+	public Product(int SKU, int categoryID, int supplierID, String productName, String productDescription,
 			double unitPrice, double unitWeight, int unitsInStock, int unitsOnOrder, int reOrderLevel) {
-		SKU = sKU;
+		this.SKU = SKU;
 		CategoryID = categoryID;
 		SupplierID = supplierID;
 		this.productName = productName;
@@ -24,6 +24,10 @@ public class Product {
 		this.unitsInStock = unitsInStock;
 		UnitsOnOrder = unitsOnOrder;
 		ReOrderLevel = reOrderLevel;
+	}
+	
+	public Product() {
+		
 	}
 
 	public int getSKU() {
