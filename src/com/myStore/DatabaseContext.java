@@ -117,9 +117,23 @@ public class DatabaseContext
 		
 	}
 	
-	public List<Category> getAllCategories()
+	public List<Category> getAllCategories() throws SQLException
 	{
+		String sql = "SELECT * FROM Categories";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
 		
+		List<Category> categories = new ArrayList<Category>();
+		
+		while (rs.next())
+		{
+			Category currCat = new Category(rs.getInt(0), rs.getString(1),
+					rs.getString(2), rs.getInt(3));
+			categories.add(currCat);
+		}
+		
+		return categories;
 	}
 	
 	public Customer getCustomerFromID()
