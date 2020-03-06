@@ -1,12 +1,7 @@
 package com.myStore;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Scanner;
+import java.sql.*;
+import java.util.*;
 
 public class DatabaseContext
 {
@@ -64,6 +59,52 @@ public class DatabaseContext
 				+ "\n-------------------------------------------------"
 				+ "\nPlease write a valid SQL statement to find your info");
 		return sc.nextLine();
+	}
+	
+	public Product getProductFromID()
+	{
+		
+	}
+	
+	public List<Product> getAllProducts()
+	{
+		String sql = "SELECT * FROM CoughDrops";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
+		
+		
+		
+	}
+	
+	public Order getOrderFromID()
+	{
+		
+	}
+	
+	public List<Order> getAllOrders()
+	{
+		
+	}
+	
+	public Category getCategoryFromID()
+	{
+		
+	}
+	
+	public List<Category> getAllCategories()
+	{
+		
+	}
+	
+	public Customer getCustomerFromID()
+	{
+		
+	}
+	
+	public List<Customer> getAllCustomers()
+	{
+		
 	}
 
 }
