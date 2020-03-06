@@ -160,7 +160,7 @@ public class DatabaseContext {
 
 	}
 
-	public void getPricedCustomers(double price) throws SQLException {
+	public void printPricedCustomers(double price) throws SQLException {
 		String sql = "SELECT OrderID FROM OrderDetails WHERE SUM(salePrice) > ? GROUP BY OrderNumber";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setDouble(0, price);
@@ -205,5 +205,38 @@ public class DatabaseContext {
 				}
 			}
 		}
+	}
+	
+	public List<Customer> getAllCustomersFromZip(int zip) throws SQLException {
+		String sql = "SELECT * FROM Customers WHERE zipCode = " + zip;
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
+
+		List<Customer> customers = new ArrayList<Customer>();
+		while (rs.next()) {
+			Customer currCust = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+			customers.add(currCust);
+		}
+
+		return customers;
+
+	}
+	
+	public List<Order> getOrdersSortedPrice() throws SQLException{
+		String sql = "SELECT orderNumber, customerID, shipperID, orderDate, paymentInfo,\r\n" + 
+				"			shipDate, shipper, orderStatus, SUM(SalePrice) FROM OrderDetails GROUP BY OrderNumber DESC";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
+
+		List<Order> orders = new ArrayList<Order>();
+		while (rs.next()) {
+			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(),
+					rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6), rs.getString(7));
+			orders.add(currOrd);
+		}
+		return orders;
 	}
 }
