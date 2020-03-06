@@ -139,8 +139,9 @@ public class DatabaseContext {
 		pstmt.setInt(1, id);
 		ResultSet rs = pstmt.executeQuery(sql);
 		pstmt.close();
-		return new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-				rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+		return new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+				rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
+				, Integer.parseInt(rs.getString(10)));
 	}
 
 	public List<Customer> getAllCustomers() throws SQLException {
@@ -151,8 +152,9 @@ public class DatabaseContext {
 
 		List<Customer> customers = new ArrayList<Customer>();
 		while (rs.next()) {
-			Customer currCust = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+			Customer currCust = new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
+					, Integer.parseInt(rs.getString(10)));
 			customers.add(currCust);
 		}
 
@@ -215,8 +217,9 @@ public class DatabaseContext {
 
 		List<Customer> customers = new ArrayList<Customer>();
 		while (rs.next()) {
-			Customer currCust = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+			Customer currCust = new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
+					, Integer.parseInt(rs.getString(10)));
 			customers.add(currCust);
 		}
 
