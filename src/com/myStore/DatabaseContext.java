@@ -1,6 +1,7 @@
 package com.myStore;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DatabaseContext
@@ -68,7 +69,7 @@ public class DatabaseContext
 	
 	public List<Product> getAllProducts() throws SQLException
 	{
-		String sql = "SELECT * FROM CoughDrops";
+		String sql = "SELECT * FROM Products";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		stmt.close();
@@ -91,9 +92,24 @@ public class DatabaseContext
 		
 	}
 	
-	public List<Order> getAllOrders()
+	public List<Order> getAllOrders() throws SQLException
 	{
+		String sql = "SELECT * FROM Orders";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
 		
+		List<Order> orders = new ArrayList<Order>();
+		
+		while (rs.next())
+		{
+			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2),
+					rs.getDate(3).toLocalDate(), rs.getString(4),
+					rs.getDate(5).toLocalDate(), rs.getString(6), rs.getString(7));
+			orders.add(currOrd);
+		}
+		
+		return orders;
 	}
 	
 	public Category getCategoryFromID()
