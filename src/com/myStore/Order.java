@@ -2,7 +2,7 @@ package com.myStore;
 
 import java.time.LocalDate;
 
-public class Orders {
+public class Order {
 	private int orderNumber;
 	private int customerID;
 	private int shipperID;
@@ -11,7 +11,7 @@ public class Orders {
 	private LocalDate shipDate;
 	private String shipper;
 	private String orderStatus;
-	public Orders(int orderNumber, int customerID, int shipperID, LocalDate orderDate, String paymentInfo,
+	public Order(int orderNumber, int customerID, int shipperID, LocalDate orderDate, String paymentInfo,
 			LocalDate shipDate, String shipper, String orderStatus) {
 		super();
 		this.orderNumber = orderNumber;

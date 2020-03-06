@@ -1,12 +1,12 @@
 package com.myStore;
 
-public class Categories {
+public class Category {
 	private int categoryID;
 	private String categoryName;
 	private String categoryDescription;
 	private int parentID;
 
-	public Categories(int categoryID, String categoryName, String categoryDescription, int parentID) {
+	public Category(int categoryID, String categoryName, String categoryDescription, int parentID) {
 		this.categoryID = categoryID;
 		this.categoryName = categoryName;
 		this.categoryDescription = categoryDescription;

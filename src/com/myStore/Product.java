@@ -1,6 +1,6 @@
 package com.myStore;
 
-public class Products {
+public class Product {
 	private int SKU;
 	private int CategoryID;
 	private int SupplierID;
@@ -12,7 +12,7 @@ public class Products {
 	private int UnitsOnOrder;
 	private int ReOrderLevel;
 
-	public Products(int sKU, int categoryID, int supplierID, String productName, String productDescription,
+	public Product(int sKU, int categoryID, int supplierID, String productName, String productDescription,
 			double unitPrice, double unitWeight, int unitsInStock, int unitsOnOrder, int reOrderLevel) {
 		SKU = sKU;
 		CategoryID = categoryID;

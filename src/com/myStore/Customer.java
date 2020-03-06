@@ -1,6 +1,6 @@
 package com.myStore;
 
-public class Customers {
+public class Customer {
 	private int customerID;
 	private String name;
 	private String addressLine1;
@@ -11,7 +11,7 @@ public class Customers {
 	private String Email;
 	private int phoneNumber;
 	private int billingInfo;
-	public Customers(int customerID, String name, String addressLine1, String addressLine2, String city, String state,
+	public Customer(int customerID, String name, String addressLine1, String addressLine2, String city, String state,
 			int zipCode, String email, int phoneNumber, int billingInfo) {
 		this.customerID = customerID;
 		this.name = name;
