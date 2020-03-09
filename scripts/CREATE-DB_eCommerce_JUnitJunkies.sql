@@ -68,7 +68,7 @@ CREATE TABLE Orders
 DROP TABLE IF EXISTS Categories;
 CREATE TABLE Categories
 	(
-			CategoryID		INTEGER			NOT NULL	PRIMARY KEY
+			CategoryID		INTEGER			NOT NULL	PRIMARY KEY 	AUTO_INCREMENT
 		,	CategoryName	VARCHAR(35)		NOT NULL
         ,	CatDescription	VARCHAR(300)	NOT NULL
         ,	ParentID		VARCHAR(300)	NOT NULL
@@ -127,4 +127,40 @@ INSERT INTO Customers
 		(Name, AddressLine1, AddressLine2, City, State, ZipCode, Email, Phone, BillingInfo)
 VALUES	('Chad Smith', '1123 Wilson Way', NULL, 'Issaquah', 'Washington', '98027', 'Chad@TravelWithChad.com', '253-555-1234', 'ABCD12345')
 	,	('Brad Lawson', '1234 Brad Ave', NULL, 'Tacoma', 'Washington', '98404', 'Brad@TravelWithBrad.com', '253-555-4321', 'ABCD54321')
+    ,	('Dad Heny', '4321 Heny St', NULL, 'Factoria', 'Washington', '98888', 'Heny@Korea.kr', '206-333-3456', 'AASF96584')
+    ,	('Sad Heny', '7293 Denny Blvd', '1N', 'Bellevue', 'Washington', '98006', 'Jenny@Korea.kr', '234-456-6789', 'OUER92874')
+    ,	('Bad Heny', '5555 Benny Creek', NULL, 'Compton', 'California', '45673', 'Wenny@Cali.com', '838-837-8939', '!@#D03830')
+    ;
+
+INSERT INTO Categories
+		(CategoryName, CatDescription, ParentID)
+VALUES	('Pets', 'Basically slaves', 0)
+	, 	('Cats', 'Furry, feline compantions', 1)
+	,	('Dogs', 'The Mutts', 1)
+    ;
+
+INSERT INTO Suppliers
+		(SupplierName, ContactFName, ContactLName, ContactTitle, AddressLine1, AddressLine2, City, State, ZipCode, Phone, Email)
+VALUES ('Costco', 'Cost', 'Co', '12345 COstcoHeadqarters', 'Yeayea building', 'Warehouse', 'Here', 'State', '12345', '123-456-7890', 'Costco.com.Costco')
+	;
+INSERT INTO Products
+		(CategoryID, SupplierID, ProdName , ProdDescription, UnitWeight, UnitsInStock,	UnitsOnOrder, ReOrderLevel)
+VALUES	(2,1,'MeowCats','Omg, they cute', 44.00, 5,3,1)
+	,	(3,1,'RuffDoggies', 'omg, they bark', 33.00, 3,2,1)
+	;
+INSERT INTO Shippers
+		(ShipperName, ContactFName, ContactLName, ContactTitle, Phone, Email)
+VALUES	('Amazon', 'Ama', 'Zon', 'Amazing', '233-232-2323', 'TakemyMoney@Amazon.az')
+	;
+
+INSERT INTO Orders
+		(CustomerID, ShipperID, OrderDate, PaymentInfo, ShipDate, Shipper, OrderStatus)
+VALUES 	(2,1,'2019-03-04','I\'m not sure what this is','2019-05-06','USPS','Delivered')
+	,	(3,1,'2020-03-04', 'PAyment stuff', '2020-03-09', 'UPS', 'In limbo')
+    ;
+
+INSERT INTO OrderDetails
+		(OrderNumber, SKU, Quantity, SalePrice, Discount)
+VALUES	(1,1,1,33.33,0.1)
+	,	(1,2,1,33.22,0.1)
     ;
