@@ -1,18 +1,18 @@
 package com.myStore;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Order {
 	private int orderNumber;
 	private int customerID;
 	private int shipperID;
-	private LocalDate orderDate;
+	private Date orderDate;
 	private String paymentInfo;
-	private LocalDate shipDate;
+	private Date shipDate;
 	private String shipper;
 	private String orderStatus;
-	public Order(int orderNumber, int customerID, int shipperID, LocalDate orderDate, String paymentInfo,
-			LocalDate shipDate, String shipper, String orderStatus) {
+	public Order(int orderNumber, int customerID, int shipperID, Date orderDate, String paymentInfo,
+			Date shipDate, String shipper, String orderStatus) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerID = customerID;
@@ -41,10 +41,10 @@ public class Order {
 	public void setShipperID(int shipperID) {
 		this.shipperID = shipperID;
 	}
-	public LocalDate getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(LocalDate orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getPaymentInfo() {
@@ -53,10 +53,10 @@ public class Order {
 	public void setPaymentInfo(String paymentInfo) {
 		this.paymentInfo = paymentInfo;
 	}
-	public LocalDate getShipDate() {
+	public Date getShipDate() {
 		return shipDate;
 	}
-	public void setShipDate(LocalDate shipDate) {
+	public void setShipDate(Date shipDate) {
 		this.shipDate = shipDate;
 	}
 	public String getShipper() {
