@@ -60,7 +60,7 @@ CREATE TABLE Orders
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
         ,	ShipDate			DATE			NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
-        ,	OrderStatus			VARCHAR(30)		NOT NULL
+        ,	OrderStatus			BOOLEAN			NOT NULL
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
         ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
     );
@@ -82,6 +82,7 @@ CREATE TABLE Products
         ,	SupplierID			INTEGER			NOT NULL	-- foreign key
         ,	ProdName			VARCHAR(30)		NOT NULL
         ,	ProdDescription		VARCHAR(30)		NOT NULL
+        ,	UnitPrice			DECIMAL			NOT NULL
         ,	UnitWeight			INTEGER			NOT NULL
         ,	UnitsInStock		INTEGER			NOT NULL  
         ,	UnitsOnOrder		INTEGER			NOT NULL
@@ -144,9 +145,9 @@ INSERT INTO Suppliers
 VALUES ('Costco', 'Cost', 'Co', '12345 COstcoHeadqarters', 'Yeayea building', 'Warehouse', 'Here', 'State', '12345', '123-456-7890', 'Costco.com.Costco')
 	;
 INSERT INTO Products
-		(CategoryID, SupplierID, ProdName , ProdDescription, UnitWeight, UnitsInStock,	UnitsOnOrder, ReOrderLevel)
-VALUES	(2,1,'MeowCats','Omg, they cute', 44.00, 5,3,1)
-	,	(3,1,'RuffDoggies', 'omg, they bark', 33.00, 3,2,1)
+		(CategoryID, SupplierID, ProdName , ProdDescription, UnitPrice, UnitWeight, UnitsInStock,	UnitsOnOrder, ReOrderLevel)
+VALUES	(2,1,'MeowCats','Omg, they cute', 50, 44.00, 5,3,1)
+	,	(3,1,'RuffDoggies', 'omg, they bark', 100, 33.00, 3,2,1)
 	;
 INSERT INTO Shippers
 		(ShipperName, ContactFName, ContactLName, ContactTitle, Phone, Email)
@@ -155,12 +156,15 @@ VALUES	('Amazon', 'Ama', 'Zon', 'Amazing', '233-232-2323', 'TakemyMoney@Amazon.a
 
 INSERT INTO Orders
 		(CustomerID, ShipperID, OrderDate, PaymentInfo, ShipDate, Shipper, OrderStatus)
-VALUES 	(2,1,'2019-03-04','I\'m not sure what this is','2019-05-06','USPS','Delivered')
-	,	(3,1,'2020-03-04', 'PAyment stuff', '2020-03-09', 'UPS', 'In limbo')
+VALUES 	(2,1,'2019-03-04','I\'m not sure what this is','2019-05-06','USPS',TRUE)
+	,	(3,1,'2020-03-04', 'PAyment stuff', '2020-03-09', 'UPS', FALSE)
     ;
 
 INSERT INTO OrderDetails
 		(OrderNumber, SKU, Quantity, SalePrice, Discount)
 VALUES	(1,1,1,33.33,0.1)
-	,	(1,2,1,33.22,0.1) --hehe
+	,	(1,2,1,33.22,0.1) -- hehe
     ;
+    
+-- DELETE FROM OrderDetails WHERE OrderNumber = 2;
+-- DELETE FROM Orders WHERE OrderNumber = 2;
