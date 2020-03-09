@@ -162,5 +162,5 @@ VALUES 	(2,1,'2019-03-04','I\'m not sure what this is','2019-05-06','USPS','Deli
 INSERT INTO OrderDetails
 		(OrderNumber, SKU, Quantity, SalePrice, Discount)
 VALUES	(1,1,1,33.33,0.1)
-	,	(1,2,1,33.22,0.1)
+	,	(1,2,1,33.22,0.1) --hehe
     ;
