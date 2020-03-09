@@ -1,6 +1,7 @@
 package com.myStore;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 public class DatabaseContext {
@@ -262,7 +263,19 @@ public class DatabaseContext {
 		}	
 	}
 
-	public void insertOrder(Order newOrder) {
-		
+	public void insertOrder(Order newOrder) throws SQLException {
+		String sql = "INSERT  INTO Orders (customerID, shipperID, orderDate,  paymentInfo," + 
+				"shipDate, orderStatus)  VALUES (?,?,?,?,?,?)";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, newOrder.getCustomerID());
+		pstmt.setInt(2, newOrder.getShipperID());
+		pstmt.setDate(3, newOrder.getOrderDate());
+		pstmt.setString(4,newOrder.getPaymentInfo());
+		pstmt.setDate(5, newOrder.getShipDate());
+		pstmt.setBoolean(6, newOrder.getOrderStatus());
+		int rowsaffected = pstmt.executeUpdate();
+		if(rowsaffected > 0) {
+		System.out.println("Table updated");
+		}
 	}
 }
