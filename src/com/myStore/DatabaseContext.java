@@ -242,4 +242,17 @@ public class DatabaseContext {
 		}
 		return orders;
 	}
+	
+	public void deleteOrders(int id) throws SQLException{
+		String sql = "DELETE * FROM Orders WHERE OrderID = ? ";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(0, id);
+		boolean done = pstmt.execute(sql);
+		
+		if(done == true) {
+			System.out.println("Your order has been deleted");
+		}
+		
+		
+	}
 }
