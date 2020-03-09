@@ -58,7 +58,7 @@ CREATE TABLE Orders
         ,	ShipperID			INTEGER			NOT NULL	-- foreign key
         ,	OrderDate			DATE			NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
-        ,	ShipDate			VARCHAR(30)		NOT NULL
+        ,	ShipDate			DATE			NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
         ,	OrderStatus			VARCHAR(30)		NOT NULL
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
@@ -96,9 +96,9 @@ CREATE TABLE OrderDetails
 			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
         ,	CustomerID			INTEGER			NOT NULL	-- foreign key
         ,	ShipperID			INTEGER			NOT NULL	-- foreign key
-        ,	OrderDate			DATE		NOT NULL
+        ,	OrderDate			DATE			NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
-        ,	ShipDate			VARCHAR(30)		NOT NULL
+        ,	ShipDate			DATE			NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
         ,	OrderStatus			VARCHAR(30)		NOT NULL
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
