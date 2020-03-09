@@ -236,8 +236,8 @@ public class DatabaseContext {
 
 		List<Order> orders = new ArrayList<Order>();
 		while (rs.next()) {
-			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(),
-					rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6), rs.getString(7));
+			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3),
+					rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7));
 			orders.add(currOrd);
 		}
 		return orders;
