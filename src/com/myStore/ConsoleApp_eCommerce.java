@@ -1,6 +1,8 @@
 package com.myStore;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class ConsoleApp_eCommerce
@@ -100,7 +102,32 @@ public class ConsoleApp_eCommerce
 				mainMenu(sc, dbc);
 				break;
 				
-			
+			case 6:
+				System.out.println("Starting up order creation wizard...");
+				
+				System.out.print("Please enter the customer ID> ");
+				int customerID = sc.nextInt();
+				System.out.print("Please enter the shipper ID> ");
+				int shipperID = sc.nextInt();
+				System.out.println("Setting order date as current date...");
+				Date orderDate = new Date( LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth() );
+				System.out.print("Please enter the payment info> ");
+				String paymentInfo = sc.nextLine();
+				
+				System.out.println("Setting up shipping date...");
+				System.out.print("Enter the year the order will ship (e.g. 2020)> ");
+				int year = ( sc.nextInt() );
+				System.out.print("Enter the month the order will ship (e.g. 8)> ");
+				int month = ( sc.nextInt() );
+				System.out.print("Enter the day the order will ship (e.g. 12)> ");
+				int day = ( sc.nextInt() );
+				Date shipDate = new Date( year, month, day );
+				
+				boolean orderStatus = false;
+				
+				Order newOrder = new Order(customerID, shipperID, orderDate, paymentInfo, shipDate, orderStatus);
+				mainMenu(sc, dbc);
+				break;
 				
 			case 0:
 				System.out.println("Deallocating system resources...");

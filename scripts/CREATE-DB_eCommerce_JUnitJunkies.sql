@@ -59,7 +59,6 @@ CREATE TABLE Orders
         ,	OrderDate			DATE			NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
         ,	ShipDate			DATE			NOT NULL
-        ,	Shipper				VARCHAR(30)		NOT NULL 
         ,	OrderStatus			BOOLEAN			NOT NULL
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
         ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
@@ -155,9 +154,9 @@ VALUES	('Amazon', 'Ama', 'Zon', 'Amazing', '233-232-2323', 'TakemyMoney@Amazon.a
 	;
 
 INSERT INTO Orders
-		(CustomerID, ShipperID, OrderDate, PaymentInfo, ShipDate, Shipper, OrderStatus)
-VALUES 	(2,1,'2019-03-04','I\'m not sure what this is','2019-05-06','USPS',TRUE)
-	,	(3,1,'2020-03-04', 'PAyment stuff', '2020-03-09', 'UPS', FALSE)
+		(CustomerID, ShipperID, OrderDate, PaymentInfo, ShipDate, OrderStatus)
+VALUES 	(2,1,'2019-03-04','I\'m not sure what this is','2019-05-06',TRUE)
+	,	(3,1,'2020-03-04', 'PAyment stuff', '2020-03-09', FALSE)
     ;
 
 INSERT INTO OrderDetails

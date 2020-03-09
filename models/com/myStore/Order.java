@@ -9,10 +9,9 @@ public class Order {
 	private Date orderDate;
 	private String paymentInfo;
 	private Date shipDate;
-	private String shipper;
 	private boolean orderStatus;
 	public Order(int orderNumber, int customerID, int shipperID, Date orderDate, String paymentInfo,
-			Date shipDate, String shipper, boolean orderStatus) {
+			Date shipDate, boolean orderStatus) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerID = customerID;
@@ -20,9 +19,20 @@ public class Order {
 		this.orderDate = orderDate;
 		this.paymentInfo = paymentInfo;
 		this.shipDate = shipDate;
-		this.shipper = shipper;
 		this.orderStatus = orderStatus;
 	}
+	
+	public Order(int customerID, int shipperID, Date orderDate, String paymentInfo,
+			Date shipDate, boolean orderStatus) {
+		super();
+		this.customerID = customerID;
+		this.shipperID = shipperID;
+		this.orderDate = orderDate;
+		this.paymentInfo = paymentInfo;
+		this.shipDate = shipDate;
+		this.orderStatus = orderStatus;
+	}
+
 	public int getOrderNumber() {
 		return orderNumber;
 	}
@@ -59,12 +69,6 @@ public class Order {
 	public void setShipDate(Date shipDate) {
 		this.shipDate = shipDate;
 	}
-	public String getShipper() {
-		return shipper;
-	}
-	public void setShipper(String shipper) {
-		this.shipper = shipper;
-	}
 	public boolean getOrderStatus() {
 		return orderStatus;
 	}
@@ -75,7 +79,6 @@ public class Order {
 	public String toString()
 	{
 		return "Order [orderNumber=" + orderNumber + ", customerID=" + customerID + ", shipperID=" + shipperID
-				+ ", orderDate=" + orderDate + ", paymentInfo=" + paymentInfo + ", shipDate=" + shipDate + ", shipper="
-				+ shipper + ", orderStatus=" + orderStatus + "]";
+				+ ", orderDate=" + orderDate + ", paymentInfo=" + paymentInfo + ", shipDate=" + shipDate +  ", orderStatus=" + orderStatus + "]";
 	}
 }

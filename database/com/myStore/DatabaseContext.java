@@ -91,7 +91,7 @@ public class DatabaseContext {
 		pstmt.close();
 
 		return new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4),
-				rs.getString(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8));
+				rs.getString(5), rs.getDate(6), rs.getBoolean(7));
 	}
 
 	public List<Order> getAllOrders() throws SQLException {
@@ -103,7 +103,7 @@ public class DatabaseContext {
 
 		while (rs.next()) {
 			Order currOrd = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4),
-					rs.getString(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8));
+					rs.getString(5), rs.getDate(6), rs.getBoolean(7));
 			orders.add(currOrd);
 		}
 
@@ -240,7 +240,7 @@ public class DatabaseContext {
 		List<Order> orders = new ArrayList<Order>();
 		while (rs.next()) {
 			Order currOrd = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4),
-					rs.getString(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8));
+					rs.getString(5), rs.getDate(6), rs.getBoolean(7));
 			orders.add(currOrd);
 		}
 		stmt.close();
@@ -260,5 +260,9 @@ public class DatabaseContext {
 		if(rowsaffected > 0) {
 			System.out.println("we did the deleties");
 		}	
+	}
+
+	public void insertOrder(Order newOrder) {
+		
 	}
 }
