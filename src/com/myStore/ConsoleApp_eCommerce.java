@@ -1,19 +1,33 @@
 package com.myStore;
 
 import java.sql.SQLException;
+import java.util.*;
 
-public class ConsoleApp_eCommerce {
+public class ConsoleApp_eCommerce
+{
 
-	public static void main(String[] args) {
-		// initialization
+	public static void main(String[] args)
+	{
+
+		// Hello
+		System.out.println("Welcome to the MyStore Console Application");
+		System.out.println("Created by the J-Unit Junkies");
+
+		// Initialize database context and scanner
+		Scanner sc = new Scanner(System.in);
 		DatabaseContext dbc;
-		try {
+		try
+		{
 			dbc = new DatabaseContext();
-			dbc.runStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
 		}
+		catch (SQLException e)
+		{
+			System.out.println("Sorry! Could not connect to the database.");
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 }
