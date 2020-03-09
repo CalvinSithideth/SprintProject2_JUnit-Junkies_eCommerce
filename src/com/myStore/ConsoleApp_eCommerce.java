@@ -126,6 +126,7 @@ public class ConsoleApp_eCommerce
 				boolean orderStatus = false;
 				
 				Order newOrder = new Order(customerID, shipperID, orderDate, paymentInfo, shipDate, orderStatus);
+				dbc.insertOrder(newOrder);
 				mainMenu(sc, dbc);
 				break;
 				
