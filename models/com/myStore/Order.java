@@ -10,9 +10,9 @@ public class Order {
 	private String paymentInfo;
 	private Date shipDate;
 	private String shipper;
-	private String orderStatus;
+	private boolean orderStatus;
 	public Order(int orderNumber, int customerID, int shipperID, Date orderDate, String paymentInfo,
-			Date shipDate, String shipper, String orderStatus) {
+			Date shipDate, String shipper, boolean orderStatus) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerID = customerID;
@@ -65,10 +65,17 @@ public class Order {
 	public void setShipper(String shipper) {
 		this.shipper = shipper;
 	}
-	public String getOrderStatus() {
+	public boolean getOrderStatus() {
 		return orderStatus;
 	}
-	public void setOrderStatus(String orderStatus) {
+	public void setOrderStatus(boolean orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+	@Override
+	public String toString()
+	{
+		return "Order [orderNumber=" + orderNumber + ", customerID=" + customerID + ", shipperID=" + shipperID
+				+ ", orderDate=" + orderDate + ", paymentInfo=" + paymentInfo + ", shipDate=" + shipDate + ", shipper="
+				+ shipper + ", orderStatus=" + orderStatus + "]";
 	}
 }
