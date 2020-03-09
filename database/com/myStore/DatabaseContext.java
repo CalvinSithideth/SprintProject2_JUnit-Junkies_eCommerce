@@ -1,7 +1,6 @@
 package com.myStore;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 
 public class DatabaseContext {
@@ -12,6 +11,11 @@ public class DatabaseContext {
 
 	public DatabaseContext() throws SQLException {
 		con = DriverManager.getConnection(url, USERNAME, PASSWORD);
+	}
+	
+	// EXIT PROGRAM AFTER CALLING THIS
+	public void close() throws SQLException {
+		con.close();
 	}
 
 	public void runStatement() {
@@ -66,16 +70,16 @@ public class DatabaseContext {
 		String sql = "SELECT * FROM Products";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		stmt.close();
 
 		List<Product> products = new ArrayList<Product>();
-
+		
 		while (rs.next()) {
 			Product currProd = new Product(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5),
 					rs.getDouble(6), rs.getDouble(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
 			products.add(currProd);
 		}
 
+		stmt.close();
 		return products;
 	}
 
@@ -86,24 +90,24 @@ public class DatabaseContext {
 		ResultSet rs = pstmt.executeQuery(sql);
 		pstmt.close();
 
-		return new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4),
-				rs.getDate(5), rs.getString(6), rs.getString(7));
+		return new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4),
+				rs.getString(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8));
 	}
 
 	public List<Order> getAllOrders() throws SQLException {
 		String sql = "SELECT * FROM Orders";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		stmt.close();
 
 		List<Order> orders = new ArrayList<Order>();
 
 		while (rs.next()) {
-			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3),
-					rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7));
+			Order currOrd = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4),
+					rs.getString(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8));
 			orders.add(currOrd);
 		}
 
+		stmt.close();
 		return orders;
 	}
 
@@ -121,7 +125,6 @@ public class DatabaseContext {
 		String sql = "SELECT * FROM Categories";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		stmt.close();
 
 		List<Category> categories = new ArrayList<Category>();
 
@@ -130,6 +133,7 @@ public class DatabaseContext {
 			categories.add(currCat);
 		}
 
+		stmt.close();
 		return categories;
 	}
 
@@ -139,25 +143,25 @@ public class DatabaseContext {
 		pstmt.setInt(1, id);
 		ResultSet rs = pstmt.executeQuery(sql);
 		pstmt.close();
-		return new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
-				rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
-				, Integer.parseInt(rs.getString(10)));
+		return new Customer((rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+				rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)
+				, rs.getString(10));
 	}
 
 	public List<Customer> getAllCustomers() throws SQLException {
 		String sql = "SELECT * FROM Customers";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		stmt.close();
 
 		List<Customer> customers = new ArrayList<Customer>();
 		while (rs.next()) {
-			Customer currCust = new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
-					, Integer.parseInt(rs.getString(10)));
+			Customer currCust = new Customer((rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)
+					, rs.getString(10));
 			customers.add(currCust);
 		}
 
+		stmt.close();
 		return customers;
 
 	}
@@ -167,12 +171,12 @@ public class DatabaseContext {
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setDouble(0, price);
 		ResultSet rs = pstmt.executeQuery(sql);
-		pstmt.close();
 
 		List<Integer> list = new ArrayList<Integer>();
 		while (rs.next()) {
 			list.add(rs.getInt(1));
 		}
+		pstmt.close();
 		
 		
 		List<Integer> custList = new ArrayList<Integer>();
@@ -181,11 +185,11 @@ public class DatabaseContext {
 			PreparedStatement pstmt2 = con.prepareStatement(sql2);
 			pstmt.setInt(0, i);
 			ResultSet rs1 = pstmt.executeQuery(sql2);
-			pstmt2.close();
 			
 			while(rs.next()) {
 				custList.add(rs1.getInt(1));
 			}
+			pstmt2.close();
 		}
 		
 		
@@ -196,7 +200,6 @@ public class DatabaseContext {
 			ResultSet rs2 = pstmt.executeQuery(sql3);
 			ResultSetMetaData rsmd2 = rs2.getMetaData();
 			int cols = rsmd2.getColumnCount();
-			pstmt3.close();
 			
 			
 			while(rs2.next()) {
@@ -206,6 +209,7 @@ public class DatabaseContext {
 					System.out.println(name + ": " + value);
 				}
 			}
+			pstmt3.close();
 		}
 	}
 	
@@ -213,16 +217,16 @@ public class DatabaseContext {
 		String sql = "SELECT * FROM Customers WHERE zipCode = " + zip;
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		stmt.close();
 
 		List<Customer> customers = new ArrayList<Customer>();
 		while (rs.next()) {
-			Customer currCust = new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
-					, Integer.parseInt(rs.getString(10)));
+			Customer currCust = new Customer((rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)
+					, rs.getString(10));
 			customers.add(currCust);
 		}
 
+		stmt.close();
 		return customers;
 
 	}
@@ -232,27 +236,29 @@ public class DatabaseContext {
 				"			shipDate, shipper, orderStatus, SUM(SalePrice) FROM OrderDetails GROUP BY OrderNumber DESC";
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		stmt.close();
 
 		List<Order> orders = new ArrayList<Order>();
 		while (rs.next()) {
-			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3),
-					rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7));
+			Order currOrd = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4),
+					rs.getString(5), rs.getDate(6), rs.getString(7), rs.getBoolean(8));
 			orders.add(currOrd);
 		}
+		stmt.close();
 		return orders;
 	}
 	
 	public void deleteOrders(int id) throws SQLException{
-		String sql = "DELETE * FROM Orders WHERE OrderID = ? ";
+		String sql = 	"DELETE FROM OrderDetails WHERE OrderNumber = ?";
+		String sql2 =	"DELETE FROM Orders WHERE OrderNumber = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setInt(0, id);
-		boolean done = pstmt.execute(sql);
-		
-		if(done == true) {
-			System.out.println("Your order has been deleted");
-		}
-		
-		
+		pstmt.setInt(1, id);
+		PreparedStatement pstmt2 = con.prepareStatement(sql2);
+		pstmt2.setInt(1, id);
+		int rowsaffected = pstmt.executeUpdate();
+		rowsaffected += pstmt2.executeUpdate();
+
+		if(rowsaffected > 0) {
+			System.out.println("we did the deleties");
+		}	
 	}
 }
