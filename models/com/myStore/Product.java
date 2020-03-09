@@ -109,4 +109,13 @@ public class Product {
 	public void setReOrderLevel(int reOrderLevel) {
 		ReOrderLevel = reOrderLevel;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Product [SKU=" + SKU + ", CategoryID=" + CategoryID + ", SupplierID=" + SupplierID + ", productName="
+				+ productName + ", productDescription=" + productDescription + ", unitPrice=" + unitPrice
+				+ ", unitWeight=" + unitWeight + ", unitsInStock=" + unitsInStock + ", UnitsOnOrder=" + UnitsOnOrder
+				+ ", ReOrderLevel=" + ReOrderLevel + "]";
+	}
 }
