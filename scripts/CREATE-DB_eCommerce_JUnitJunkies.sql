@@ -56,9 +56,9 @@ CREATE TABLE Orders
 			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
         ,	CustomerID			INTEGER			NOT NULL	-- foreign key
         ,	ShipperID			INTEGER			NOT NULL	-- foreign key
-        ,	OrderDate			VARCHAR(30)		NOT NULL
+        ,	OrderDate			DATE			NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
-        ,	ShipDate			VARCHAR(30)		NOT NULL
+        ,	ShipDate			DATE			NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
         ,	OrderStatus			VARCHAR(30)		NOT NULL
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
@@ -89,22 +89,22 @@ CREATE TABLE Products
         ,	FOREIGN KEY 		(CategoryID)	REFERENCES 	Categories(CategoryID)
         ,	FOREIGN KEY 		(SupplierID)	REFERENCES	Suppliers(SupplierID)
     );
-    
+ /*   
 DROP TABLE IF EXISTS OrderDetails;
 CREATE TABLE OrderDetails
 	(
 			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
         ,	CustomerID			INTEGER			NOT NULL	-- foreign key
         ,	ShipperID			INTEGER			NOT NULL	-- foreign key
-        ,	OrderDate			VARCHAR(30)		NOT NULL
+        ,	OrderDate			DATE			NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
-        ,	ShipDate			VARCHAR(30)		NOT NULL
+        ,	ShipDate			DATE			NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
         ,	OrderStatus			VARCHAR(30)		NOT NULL
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
         ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
     );
-    
+   */
 DROP TABLE IF EXISTS OrderDetails;
 CREATE TABLE OrderDetails
 	(
@@ -117,3 +117,14 @@ CREATE TABLE OrderDetails
         ,	FOREIGN KEY 		(SKU)	REFERENCES	Products(SKU)
         ,	PRIMARY KEY (OrderNumber, SKU)
 	);
+
+
+/*******************************************************************
+	INSERT DUMMY DATA
+*******************************************************************/
+
+INSERT INTO Customers
+		(Name, AddressLine1, AddressLine2, City, State, ZipCode, Email, Phone, BillingInfo)
+VALUES	('Chad Smith', '1123 Wilson Way', NULL, 'Issaquah', 'Washington', '98027', 'Chad@TravelWithChad.com', '253-555-1234', 'ABCD12345')
+	,	('Brad Lawson', '1234 Brad Ave', NULL, 'Tacoma', 'Washington', '98404', 'Brad@TravelWithBrad.com', '253-555-4321', 'ABCD54321')
+    ;

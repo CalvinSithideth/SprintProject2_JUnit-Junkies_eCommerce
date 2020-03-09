@@ -86,8 +86,8 @@ public class DatabaseContext {
 		ResultSet rs = pstmt.executeQuery(sql);
 		pstmt.close();
 
-		return new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getString(4),
-				rs.getDate(5).toLocalDate(), rs.getString(6), rs.getString(7));
+		return new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4),
+				rs.getDate(5), rs.getString(6), rs.getString(7));
 	}
 
 	public List<Order> getAllOrders() throws SQLException {
@@ -99,8 +99,8 @@ public class DatabaseContext {
 		List<Order> orders = new ArrayList<Order>();
 
 		while (rs.next()) {
-			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(),
-					rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6), rs.getString(7));
+			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3),
+					rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7));
 			orders.add(currOrd);
 		}
 
@@ -139,8 +139,9 @@ public class DatabaseContext {
 		pstmt.setInt(1, id);
 		ResultSet rs = pstmt.executeQuery(sql);
 		pstmt.close();
-		return new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-				rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+		return new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+				rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
+				, Integer.parseInt(rs.getString(10)));
 	}
 
 	public List<Customer> getAllCustomers() throws SQLException {
@@ -151,8 +152,9 @@ public class DatabaseContext {
 
 		List<Customer> customers = new ArrayList<Customer>();
 		while (rs.next()) {
-			Customer currCust = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt(10));
+			Customer currCust = new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
+					, Integer.parseInt(rs.getString(10)));
 			customers.add(currCust);
 		}
 
@@ -160,7 +162,7 @@ public class DatabaseContext {
 
 	}
 
-	public void getPricedCustomers(double price) throws SQLException {
+	public void printPricedCustomers(double price) throws SQLException {
 		String sql = "SELECT OrderID FROM OrderDetails WHERE SUM(salePrice) > ? GROUP BY OrderNumber";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setDouble(0, price);
@@ -205,5 +207,52 @@ public class DatabaseContext {
 				}
 			}
 		}
+	}
+	
+	public List<Customer> getAllCustomersFromZip(int zip) throws SQLException {
+		String sql = "SELECT * FROM Customers WHERE zipCode = " + zip;
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
+
+		List<Customer> customers = new ArrayList<Customer>();
+		while (rs.next()) {
+			Customer currCust = new Customer(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)), rs.getString(8), Integer.parseInt(rs.getString(9))
+					, Integer.parseInt(rs.getString(10)));
+			customers.add(currCust);
+		}
+
+		return customers;
+
+	}
+	
+	public List<Order> getOrdersSortedPrice() throws SQLException{
+		String sql = "SELECT orderNumber, customerID, shipperID, orderDate, paymentInfo,\r\n" + 
+				"			shipDate, shipper, orderStatus, SUM(SalePrice) FROM OrderDetails GROUP BY OrderNumber DESC";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		stmt.close();
+
+		List<Order> orders = new ArrayList<Order>();
+		while (rs.next()) {
+			Order currOrd = new Order(rs.getInt(0), rs.getInt(1), rs.getInt(2), rs.getDate(3),
+					rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7));
+			orders.add(currOrd);
+		}
+		return orders;
+	}
+	
+	public void deleteOrders(int id) throws SQLException{
+		String sql = "DELETE * FROM Orders WHERE OrderID = ? ";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(0, id);
+		boolean done = pstmt.execute(sql);
+		
+		if(done == true) {
+			System.out.println("Your order has been deleted");
+		}
+		
+		
 	}
 }
