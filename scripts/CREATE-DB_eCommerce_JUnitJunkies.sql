@@ -56,7 +56,7 @@ CREATE TABLE Orders
 			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
         ,	CustomerID			INTEGER			NOT NULL	-- foreign key
         ,	ShipperID			INTEGER			NOT NULL	-- foreign key
-        ,	OrderDate			VARCHAR(30)		NOT NULL
+        ,	OrderDate			DATE			NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
         ,	ShipDate			VARCHAR(30)		NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
@@ -89,14 +89,14 @@ CREATE TABLE Products
         ,	FOREIGN KEY 		(CategoryID)	REFERENCES 	Categories(CategoryID)
         ,	FOREIGN KEY 		(SupplierID)	REFERENCES	Suppliers(SupplierID)
     );
-    
+ /*   
 DROP TABLE IF EXISTS OrderDetails;
 CREATE TABLE OrderDetails
 	(
 			OrderNumber			INTEGER			NOT NULL	PRIMARY KEY		AUTO_INCREMENT
         ,	CustomerID			INTEGER			NOT NULL	-- foreign key
         ,	ShipperID			INTEGER			NOT NULL	-- foreign key
-        ,	OrderDate			VARCHAR(30)		NOT NULL
+        ,	OrderDate			DATE		NOT NULL
         ,	PaymentInfo			VARCHAR(30)		NOT NULL
         ,	ShipDate			VARCHAR(30)		NOT NULL
         ,	Shipper				VARCHAR(30)		NOT NULL 
@@ -104,7 +104,7 @@ CREATE TABLE OrderDetails
 		,	FOREIGN KEY 		(CustomerID)	REFERENCES 	Customers(CustomerID)
         ,	FOREIGN KEY 		(ShipperID)		REFERENCES	Shippers(ShipperID)
     );
-    
+   */
 DROP TABLE IF EXISTS OrderDetails;
 CREATE TABLE OrderDetails
 	(
