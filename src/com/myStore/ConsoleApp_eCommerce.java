@@ -112,7 +112,7 @@ public class ConsoleApp_eCommerce
 				System.out.print("Please enter the shipper ID> ");
 				int shipperID = sc.nextInt();
 				System.out.println("Setting order date as current date...");
-				Date orderDate = new Date( LocalDate.now().getYear() - 1900, LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth() );
+				Date orderDate = new Date( LocalDate.now().getYear() - 1900, LocalDate.now().getMonthValue() - 1, LocalDate.now().getDayOfMonth() );
 				System.out.print("Please enter the payment info> ");
 				String paymentInfo = sc.nextLine();
 				
@@ -123,7 +123,7 @@ public class ConsoleApp_eCommerce
 				int month = ( sc.nextInt() );
 				System.out.print("Enter the day the order will ship (e.g. 12)> ");
 				int day = ( sc.nextInt() );
-				Date shipDate = new Date( year - 1900, month, day );
+				Date shipDate = new Date( year - 1900, month - 1, day );
 				
 				boolean orderStatus = false;
 				
