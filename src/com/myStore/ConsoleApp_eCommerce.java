@@ -88,6 +88,7 @@ public class ConsoleApp_eCommerce
 						System.out.println(o);
 					}
 				}
+				break;
 				
 			case 5:
 				System.out.println("Uh oh, deleting an order...");
