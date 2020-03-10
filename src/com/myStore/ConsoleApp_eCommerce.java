@@ -88,6 +88,7 @@ public class ConsoleApp_eCommerce
 						System.out.println(o);
 					}
 				}
+				mainMenu(sc, dbc);
 				break;
 				
 			case 5:
